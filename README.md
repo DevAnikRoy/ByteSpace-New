@@ -32,3 +32,4 @@ Do not commit `.env` files, private keys, or a Firebase service account JSON. Th
 - `src/fonts` — Satoshi
 - `public/images` — photos
 - `public/icons` — icons
+# ByteSpace-New
