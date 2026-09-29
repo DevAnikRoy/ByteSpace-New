@@ -3,7 +3,7 @@ export const shapes = [
     src: "/images/hero/shape-squiggle-lime.png",
     width: 267,
     height: 387,
-    className: "-left-[4%] top-[4%] w-[22%] sm:w-[20%] lg:left-0 lg:top-[221px] lg:w-[267px]",
+    className: "-left-[4%] top-[4%] w-[22%] sm:w-[20%] lg:top-[221px] lg:left-[min(0px,calc(720px-50vw))] lg:w-[267px]",
   },
   {
     src: "/images/hero/shape-squiggle-white-sm.png",
@@ -22,7 +22,7 @@ export const shapes = [
     width: 213,
     height: 372,
     className:
-      "hidden sm:block sm:right-0 sm:top-0 sm:w-[14%] lg:right-auto lg:left-[1227px] lg:top-[220px] lg:w-[213px]",
+      "hidden sm:block sm:right-0 sm:top-0 sm:w-[14%] lg:top-[220px] lg:right-auto lg:left-[max(1227px,calc(50vw+507px))] lg:w-[213px]",
   },
   {
     src: "/images/hero/shape-pyramid.png",
