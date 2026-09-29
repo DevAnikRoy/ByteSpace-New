@@ -70,6 +70,19 @@ body {
   background: radial-gradient(circle closest-side, transparent calc(44.3% - 0.5px), #cbfc01 44.3%);
 }
 
+.text-fade {
+  background: linear-gradient(
+    to bottom,
+    #d4fb20 0%,
+    rgb(212 251 32 / 0.96) 25%,
+    rgb(212 251 32 / 0.81) 50.5%,
+    rgb(212 251 32 / 0.61) 68%,
+    rgb(255 255 255 / 0) 100%
+  );
+  background-clip: text;
+  color: transparent;
+}
+
 .glow {
   border-radius: 9999px;
   background: radial-gradient(
