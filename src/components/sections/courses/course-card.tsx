@@ -11,7 +11,15 @@ function Chip({ children }: { children: string }) {
   );
 }
 
-export function CourseCard({ course }: { course: Course }) {
+function CourseCardBase({
+  course,
+  ratingIcon,
+  learnersClassName,
+}: {
+  course: Course;
+  ratingIcon: string;
+  learnersClassName: string;
+}) {
   return (
     <article className="rounded-3xl border border-neutral-200 bg-white p-[15px] pb-5">
       <div className="@container relative aspect-[341/195] overflow-hidden rounded-xl bg-[#443131] xl:aspect-auto xl:h-[195px]">
@@ -40,7 +48,7 @@ export function CourseCard({ course }: { course: Course }) {
         </div>
         <p className="flex shrink-0 items-center gap-0.5 pr-px text-[18px] leading-[1.6] text-muted">
           {course.rating}
-          <Image src="/icons/rating-star.png" alt="" width={24} height={24} />
+          <Image src={ratingIcon} alt="" width={24} height={24} />
           <span className="sr-only">out of 5</span>
         </p>
       </div>
@@ -61,7 +69,9 @@ export function CourseCard({ course }: { course: Course }) {
               className={`h-8 w-8 rounded-full ${index === 0 ? "" : "-ml-2"}`}
             />
           ))}
-          <span className="-ml-2 flex h-8 w-8 items-center justify-center rounded-full bg-secondary-400 text-[12px] leading-[20px] font-medium text-neutral-950">
+          <span
+            className={`-ml-2 flex h-8 w-8 items-center justify-center rounded-full text-[12px] leading-[20px] font-medium ${learnersClassName}`}
+          >
             {course.learners}
           </span>
         </div>
@@ -74,5 +84,21 @@ export function CourseCard({ course }: { course: Course }) {
         <span className="text-[12px] leading-[1.6] text-muted">/lifetime</span>
       </p>
     </article>
+  );
+}
+
+export function CourseCard({ course }: { course: Course }) {
+  return (
+    <CourseCardBase
+      course={course}
+      ratingIcon="/icons/rating-star.png"
+      learnersClassName="bg-secondary-400 text-neutral-950"
+    />
+  );
+}
+
+export function ShowcaseCourseCard({ course }: { course: Course }) {
+  return (
+    <CourseCardBase course={course} ratingIcon="/icons/rating-star-lime.png" learnersClassName="bg-black text-white" />
   );
 }

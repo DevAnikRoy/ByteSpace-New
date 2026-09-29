@@ -21,7 +21,7 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "ByteSpace",
+  title: { default: "ByteSpace", template: "%s | ByteSpace" },
   description: "Hundreds of courses from creators you can learn from.",
 };
 
