@@ -5,7 +5,7 @@ import { SearchForm } from "@/components/sections/hero/search-form";
 export function Hero() {
   return (
     <section className="relative isolate overflow-hidden bg-primary-800 text-white lg:h-[1024px]">
-      <div className="hero-grid pointer-events-none absolute inset-y-0 -z-10" aria-hidden="true" />
+      <div className="grid-lines pointer-events-none absolute inset-y-0 -z-10" aria-hidden="true" />
       <Header />
 
       <div className="relative z-10 mx-auto max-w-[1440px] px-5 pt-6 text-center sm:px-10 sm:pt-8 lg:pt-[49px]">
