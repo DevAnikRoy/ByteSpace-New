@@ -24,7 +24,7 @@ Then open [http://localhost:3000](http://localhost:3000).
 src/
   app/                    routes, layout and global styles
   components/
-    layout/               header and navigation
+    layout/               header, footer and navigation
     sections/             landing page sections
   fonts/                  Satoshi
 public/
