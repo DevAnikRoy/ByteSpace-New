@@ -24,13 +24,6 @@
 .DS_Store
 *.pem
 
-# editor / local agent notes. next dev can recreate these; they are not app source.
-AGENTS.md
-CLAUDE.md
-.cursor/
-.claude/
-.windsurf/
-
 # keys
 *serviceAccount*.json
 *firebase-adminsdk*.json

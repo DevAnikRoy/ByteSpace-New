@@ -1,35 +1,33 @@
 # ByteSpace
 
-Course site for ByteSpace. Next.js, TypeScript, and Tailwind CSS.
+Landing page for ByteSpace, an online course platform. Built with Next.js, TypeScript and Tailwind CSS.
 
-## Setup
+## Getting started
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Then open [http://localhost:3000](http://localhost:3000).
 
 ## Scripts
 
-| Command | What it does |
-| --- | --- |
-| `npm run dev` | Start the dev server |
-| `npm run build` | Production build |
-| `npm run start` | Serve the production build |
-| `npm run lint` | Run ESLint |
+- `npm run dev` - start the dev server
+- `npm run build` - production build
+- `npm run start` - serve the production build
+- `npm run lint` - run ESLint
 
-## Environment
+## Project structure
 
-Local secrets go in `.env.local`. That file is gitignored.
+```
+src/
+  app/          routes, layout and global styles
+  components/   page sections
+  fonts/        Satoshi
+public/
+  icons/
+  images/
+```
 
-Do not commit `.env` files, private keys, or a Firebase service account JSON. The Firebase web config used in the browser is public by design, but it still belongs in `.env.local`, not in source.
-
-## Structure
-
-- `src/app` — routes and global styles
-- `src/fonts` — Satoshi
-- `public/images` — photos
-- `public/icons` — icons
-# ByteSpace-New
+Environment variables go in `.env.local` (ignored by git).
