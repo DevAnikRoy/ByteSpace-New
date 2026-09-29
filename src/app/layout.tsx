@@ -22,7 +22,7 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: "ByteSpace",
-  description: "ByteSpace — courses, creators, and a learning community.",
+  description: "Hundreds of courses from creators you can learn from.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

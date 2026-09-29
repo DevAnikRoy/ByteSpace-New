@@ -1,7 +1,5 @@
 @import "tailwindcss";
 
-/* Style guide: neutral, electric violet, lime. Poppins for headings, Satoshi for body. 12 columns, 120px margin, 40px gutter. */
-
 @theme inline {
   --font-sans: var(--font-satoshi), sans-serif;
   --font-heading: var(--font-poppins), sans-serif;
@@ -53,4 +51,19 @@ body {
   background: var(--color-background);
   color: var(--color-foreground);
   font-family: var(--font-sans);
+}
+
+/* 3840 = 32 columns, keeps the lines aligned with the 1440 layout */
+.hero-grid {
+  left: calc(50% - 1920px);
+  width: 3840px;
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.12) 1px, transparent 1px);
+  background-size: 120px 120px;
+}
+
+.hero-ring {
+  border-radius: 9999px;
+  background: radial-gradient(circle closest-side, transparent calc(44.3% - 0.5px), #cbfc01 44.3%);
 }
