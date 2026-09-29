@@ -20,8 +20,8 @@ export function Partners() {
               alt="Logoipsum"
               width={logo.width}
               height={logo.height}
-              style={{ "--logo-h": `${logo.height}px` } as CSSProperties}
-              className="h-[30px] w-auto sm:h-[34px] xl:h-(--logo-h)"
+              style={{ "--logo-w": `${logo.width}px`, "--logo-h": `${logo.height}px` } as CSSProperties}
+              className="h-[30px] w-auto sm:h-[34px] xl:h-(--logo-h) xl:w-(--logo-w)"
             />
           </li>
         ))}
