@@ -34,7 +34,7 @@ export const shapes = [
   {
     src: "/images/hero/shape-squiggle-white-lg.png",
     width: 316,
-    height: 331,
+    height: 332,
     className:
       "-right-[5%] bottom-[20%] w-[24%] sm:w-[22%] lg:right-auto lg:left-[1124px] lg:top-[672px] lg:bottom-auto lg:w-[316px]",
   },

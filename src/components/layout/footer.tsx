@@ -5,21 +5,21 @@ const linkColumns = [
   {
     title: "Browse",
     links: [
-      { label: "Featured Courses", href: "#courses" },
-      { label: "Featured Categories", href: "#courses" },
-      { label: "Business", href: "#courses" },
-      { label: "IT", href: "#courses" },
-      { label: "Design", href: "#courses" },
+      { label: "Featured Courses", href: "/#courses" },
+      { label: "Featured Categories", href: "/#courses" },
+      { label: "Business", href: "/#courses" },
+      { label: "IT", href: "/#courses" },
+      { label: "Design", href: "/#courses" },
     ],
   },
   {
     title: "Categories",
     links: [
-      { label: "Development", href: "#courses" },
-      { label: "Marketing", href: "#courses" },
-      { label: "Photography", href: "#courses" },
-      { label: "Finance", href: "#courses" },
-      { label: "Sport", href: "#courses" },
+      { label: "Development", href: "/#courses" },
+      { label: "Marketing", href: "/#courses" },
+      { label: "Photography", href: "/#courses" },
+      { label: "Finance", href: "/#courses" },
+      { label: "Sport", href: "/#courses" },
     ],
   },
   {
