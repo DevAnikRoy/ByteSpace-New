@@ -1,15 +1,21 @@
 import Image from "next/image";
-import type { ReactNode } from "react";
+import type { ComponentProps } from "react";
+
+type CardProps = ComponentProps<"article"> & { className: string };
 
 const avatars = [1, 2, 3, 4, 5, 6, 7].map((n) => `/images/hero/avatar-${n}.png`);
 
-function FloatingCard({ className, children }: { className: string; children: ReactNode }) {
-  return <article className={`absolute rounded-2xl bg-white p-4 text-neutral-950 ${className}`}>{children}</article>;
+function FloatingCard({ className, children, ...props }: CardProps) {
+  return (
+    <article className={`absolute rounded-2xl bg-white p-4 text-neutral-950 ${className}`} {...props}>
+      {children}
+    </article>
+  );
 }
 
-export function LearningProgressCard({ className }: { className: string }) {
+export function LearningProgressCard(props: CardProps) {
   return (
-    <FloatingCard className={className}>
+    <FloatingCard {...props}>
       <p className="text-[14px] leading-[1.2] font-medium">Learning Progress</p>
       <p className="mt-2 font-heading text-[48px] leading-[1.2] font-semibold tracking-[-0.01em]">55%</p>
       <div className="mt-2 h-2 w-[200px] overflow-hidden rounded-3xl bg-[#f6f6f6]">
@@ -19,9 +25,9 @@ export function LearningProgressCard({ className }: { className: string }) {
   );
 }
 
-export function HappyStudentsCard({ className }: { className: string }) {
+export function HappyStudentsCard(props: CardProps) {
   return (
-    <FloatingCard className={className}>
+    <FloatingCard {...props}>
       <p className="text-[16px] leading-[1.2] font-medium">Happy Students</p>
       <p className="flex items-center text-[12px] leading-[1.6] text-neutral-400">
         4.5 (240)
@@ -46,9 +52,9 @@ export function HappyStudentsCard({ className }: { className: string }) {
   );
 }
 
-export function CourseStatsCard({ className }: { className: string }) {
+export function CourseStatsCard(props: CardProps) {
   return (
-    <FloatingCard className={className}>
+    <FloatingCard {...props}>
       <p className="text-[16px] leading-[1.2] font-medium">UI/UX Design</p>
       <p className="flex items-center gap-2 text-[12px] leading-[1.6] text-neutral-400">
         200 Courses

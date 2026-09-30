@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Poppins } from "next/font/google";
+import { PageAnimations } from "@/components/motion/page-animations";
 import "./globals.css";
 
 const satoshi = localFont({
@@ -32,7 +33,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${satoshi.variable} ${poppins.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-background font-sans text-foreground">
+        <noscript>
+          <style>{"[data-animate]{visibility:visible!important}[data-marquee-copy]{display:none!important}"}</style>
+        </noscript>
         {children}
+        <PageAnimations />
       </body>
     </html>
   );

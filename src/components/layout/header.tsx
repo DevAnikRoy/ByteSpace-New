@@ -7,7 +7,7 @@ const activeHref = "/";
 
 export function Header() {
   return (
-    <header className="relative z-30">
+    <header data-animate="fade-down" className="relative z-30">
       <div className="mx-auto flex h-[72px] max-w-[1440px] items-center justify-between px-5 sm:h-[96px] sm:px-10 lg:h-[120px] lg:items-start lg:pt-[35px] xl:pr-page xl:pl-[122px]">
         <Link href="/" aria-label="ByteSpace home" className="shrink-0">
           <Image
