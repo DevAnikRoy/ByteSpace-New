@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { AccountNav } from "@/components/layout/account-nav";
 import type { NavLink } from "@/components/layout/nav-links";
 
 export function MobileMenu({ links }: { links: NavLink[] }) {
@@ -43,6 +44,10 @@ export function MobileMenu({ links }: { links: NavLink[] }) {
                 {link.label}
               </Link>
             ))}
+            <AccountNav
+              itemClassName="rounded-lg px-2 py-2.5 text-[16px] text-neutral-50"
+              onNavigate={() => setOpen(false)}
+            />
           </div>
         </nav>
       ) : null}
