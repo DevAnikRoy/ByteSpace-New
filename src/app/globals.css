@@ -55,6 +55,13 @@ body {
   font-family: var(--font-sans);
 }
 
+/* revealed by GSAP; stays visible when motion is reduced or scripts are off */
+@media (prefers-reduced-motion: no-preference) {
+  [data-animate] {
+    visibility: hidden;
+  }
+}
+
 /* 3840 = 32 columns, keeps the lines aligned with the 1440 layout */
 .grid-lines {
   left: calc(50% - 1920px);

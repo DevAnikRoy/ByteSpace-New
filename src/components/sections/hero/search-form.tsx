@@ -5,6 +5,8 @@ export function SearchForm() {
     <form
       action="/"
       role="search"
+      data-animate="fade-up"
+      data-at="0.4"
       className="mx-auto mt-8 flex w-full max-w-[581px] items-start gap-3 sm:gap-4 lg:mt-[60px]"
     >
       <label className="flex h-[52px] min-w-0 flex-1 items-center gap-2 rounded-[24px] bg-white px-5 sm:px-6">
