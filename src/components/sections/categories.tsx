@@ -14,7 +14,7 @@ export function Categories() {
   return (
     <section aria-labelledby="categories-title" className="bg-white pb-16 sm:pb-20 lg:pb-[120px]">
       <div className="mx-auto max-w-[1440px] px-5 sm:px-10 xl:px-page">
-        <div className="text-center">
+        <div data-animate="stagger" data-each="0.12" className="text-center">
           <h2
             id="categories-title"
             className="mx-auto max-w-[792px] font-heading text-balance text-[26px] leading-[1.2] font-semibold tracking-[-0.01em] text-ink sm:text-[32px] lg:text-[36px]"
@@ -28,7 +28,7 @@ export function Categories() {
           </p>
         </div>
 
-        <ul className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 lg:mt-[68px] lg:grid-cols-6 xl:gap-10">
+        <ul data-animate="batch" data-preset="pop" className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 lg:mt-[68px] lg:grid-cols-6 xl:gap-10">
           {categories.map((category) => (
             <li key={category.label}>
               <Link

@@ -14,6 +14,8 @@ export function AuthCard({
 }) {
   return (
     <section
+      data-animate="fade-up"
+      data-at="0.2"
       className={`flex flex-col rounded-3xl bg-white px-5 py-8 text-neutral-950 sm:px-10 sm:py-12 lg:min-h-[784px] lg:px-[63px] lg:pt-[61px] ${className}`}
     >
       <p className="text-[16px] leading-[1.6] text-primary-800 sm:text-[18px]">{eyebrow}</p>

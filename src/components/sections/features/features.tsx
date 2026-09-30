@@ -37,7 +37,7 @@ export function Features() {
 
       <div className="mx-auto max-w-[1440px] px-5 py-16 sm:px-10 sm:py-20 lg:py-[120px] xl:px-page">
         <div className="grid items-center gap-12 xl:grid-cols-[minmax(0,577px)_562px] xl:justify-between">
-          <div className="text-center xl:text-left">
+          <div data-animate="stagger" data-each="0.12" className="text-center xl:text-left">
             <h2 id="growth-title" className={`mx-auto max-w-[577px] xl:mx-0 ${headingClass}`}>
               Your Path to Professional Growth Starts Here!
             </h2>
@@ -50,7 +50,7 @@ export function Features() {
               {stats.map((stat) => (
                 <div key={stat.label} className="flex flex-col-reverse">
                   <dt className="text-[16px] leading-[1.6] text-neutral-700 sm:text-[18px]">{stat.label}</dt>
-                  <dd className="font-heading text-[30px] leading-[1.2] font-medium tracking-[-0.01em] text-primary-800 sm:text-[36px] sm:leading-[44px]">
+                  <dd data-count={stat.value} className="font-heading text-[30px] leading-[1.2] font-medium tracking-[-0.01em] text-primary-800 sm:text-[36px] sm:leading-[44px]">
                     {stat.value}
                   </dd>
                 </div>
@@ -64,13 +64,23 @@ export function Features() {
           id="creators"
           className="mt-16 grid scroll-mt-8 items-center gap-12 lg:mt-[72px] xl:grid-cols-[541px_minmax(0,580px)] xl:justify-between"
         >
-          <div className="text-center xl:order-last xl:text-left">
+          <div
+            data-animate="stagger"
+            data-stagger=":scope > h2, :scope > p"
+            data-each="0.12"
+            className="text-center xl:order-last xl:text-left"
+          >
             <h2 className={`mx-auto max-w-[400px] xl:mx-0 ${headingClass}`}>Create &amp; Manage Courses Easily.</h2>
             <p className="mx-auto mt-6 max-w-[574px] text-[16px] leading-[1.6] text-neutral-700 sm:text-[18px] sm:leading-7 lg:mt-10 xl:mx-0">
               <strong className="font-bold text-neutral-950">ByteSpace</strong> supports individuals or entities in
               the creation, publication, and administration of educational courses.
             </p>
-            <ul className="mx-auto mt-8 w-fit space-y-4 text-left lg:mt-[42px] xl:mx-0">
+            <ul
+              data-animate="stagger"
+              data-preset="from-left"
+              data-each="0.1"
+              className="mx-auto mt-8 w-fit space-y-4 text-left lg:mt-[42px] xl:mx-0"
+            >
               {creatorPerks.map((perk) => (
                 <li
                   key={perk}

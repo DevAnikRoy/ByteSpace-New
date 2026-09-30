@@ -41,7 +41,7 @@ export function Footer() {
     <footer className="border-t border-neutral-200 bg-white text-neutral-950">
       <div className="mx-auto max-w-[1440px] px-5 pt-14 pb-10 sm:px-10 lg:pt-[70px] lg:pb-[47px] xl:px-page">
         <div className="flex flex-col gap-12 xl:flex-row xl:justify-between">
-          <div className="max-w-[528px]">
+          <div data-animate="stagger" className="max-w-[528px]">
             <Link href="/" className="flex w-fit">
               <Image src="/icons/logo-dark.png" alt="ByteSpace" width={171} height={37} />
             </Link>
@@ -74,6 +74,8 @@ export function Footer() {
 
           <nav
             aria-label="Footer"
+            data-animate="stagger"
+            data-each="0.1"
             className="grid grid-cols-2 gap-x-10 gap-y-8 sm:grid-cols-3 lg:grid-cols-[repeat(3,167px)]"
           >
             {linkColumns.map((column) => (
@@ -93,8 +95,11 @@ export function Footer() {
           </nav>
         </div>
 
-        <div className="mt-12 flex flex-col gap-3 border-t border-neutral-200 pt-[22px] text-[12px] leading-[1.6] sm:flex-row sm:items-center sm:justify-between xl:mt-[130px]">
-          <p>@ 2023 ByteSpace. All rights reserved.</p>
+        <div
+          data-animate="fade"
+          className="mt-12 flex flex-col gap-3 border-t border-neutral-200 pt-[22px] text-[12px] leading-[1.6] sm:flex-row sm:items-center sm:justify-between xl:mt-[130px]"
+        >
+          <p>@ 2026 ByteSpace. All rights reserved.</p>
           <ul className="flex flex-wrap gap-x-6 gap-y-2">
             {legalLinks.map((label) => (
               <li key={label}>

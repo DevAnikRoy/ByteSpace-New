@@ -40,7 +40,11 @@ export function Testimonials() {
       </div>
 
       <div className="mx-auto max-w-[1440px] px-5 py-16 sm:px-10 sm:py-20 lg:pt-[74px] lg:pb-[59px] xl:px-[118px]">
-        <div className="max-w-[1200px] gap-10 xl:flex xl:items-end xl:justify-between">
+        <div
+          data-animate="stagger"
+          data-each="0.12"
+          className="max-w-[1200px] gap-10 xl:flex xl:items-end xl:justify-between"
+        >
           <h2
             id="testimonials-title"
             className="max-w-[577px] font-heading xl:shrink-0 text-[32px] leading-[1.2] font-semibold tracking-[-0.01em] text-black sm:text-[40px] lg:text-[44px]"
@@ -55,7 +59,7 @@ export function Testimonials() {
           </p>
         </div>
 
-        <ul className="mt-10 flex flex-wrap items-start justify-center gap-6 lg:mt-[73px] xl:gap-[41px]">
+        <ul data-animate="batch" className="mt-10 flex flex-wrap items-start justify-center gap-6 lg:mt-[73px] xl:gap-[41px]">
           {testimonials.map((item) => (
             <li
               key={item.name}
