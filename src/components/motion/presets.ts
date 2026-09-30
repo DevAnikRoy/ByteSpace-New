@@ -13,8 +13,8 @@ const offsets: Record<string, gsap.TweenVars> = {
 
 const defaults: gsap.TweenVars = { duration: 0.7, ease: "power3.out" };
 
-function revealVars(el: HTMLElement): gsap.TweenVars {
-  const preset = el.dataset.preset ?? el.dataset.animate ?? "fade-up";
+function revealVars(el: HTMLElement, group?: HTMLElement): gsap.TweenVars {
+  const preset = el.dataset.preset ?? group?.dataset.preset ?? el.dataset.animate ?? "fade-up";
   return { autoAlpha: 0, ...(offsets[preset] ?? offsets["fade-up"]), clearProps: "transform" };
 }
 
@@ -22,8 +22,15 @@ function isIntro(el: HTMLElement) {
   return el.closest("[data-intro]") !== null;
 }
 
-function staggerItems(el: HTMLElement) {
-  return el.dataset.stagger ? el.querySelectorAll(el.dataset.stagger) : el.children;
+function staggerTimeline(group: HTMLElement, vars: gsap.TimelineVars = {}) {
+  const items = group.dataset.stagger ? group.querySelectorAll(group.dataset.stagger) : group.children;
+  const each = Number(group.dataset.each ?? 0.08);
+  const tl = gsap.timeline({ defaults, ...vars });
+  gsap.set(group, { autoAlpha: 1 });
+  Array.from(items).forEach((item, index) => {
+    tl.from(item, revealVars(item as HTMLElement, group), index * each);
+  });
+  return tl;
 }
 
 function playIntro(root: ParentNode) {
@@ -32,8 +39,7 @@ function playIntro(root: ParentNode) {
   root.querySelectorAll<HTMLElement>("[data-intro] [data-animate]").forEach((el) => {
     const at = Number(el.dataset.at ?? 0);
     if (el.dataset.animate === "stagger") {
-      gsap.set(el, { autoAlpha: 1 });
-      tl.from(staggerItems(el), { ...revealVars(el), stagger: 0.08 }, at);
+      tl.add(staggerTimeline(el), at);
     } else {
       tl.from(el, revealVars(el), at);
     }
@@ -45,13 +51,7 @@ function revealOnScroll(root: ParentNode) {
     if (isIntro(el)) return;
 
     if (el.dataset.animate === "stagger") {
-      gsap.set(el, { autoAlpha: 1 });
-      gsap.from(staggerItems(el), {
-        ...defaults,
-        ...revealVars(el),
-        stagger: Number(el.dataset.each ?? 0.08),
-        scrollTrigger: { trigger: el, start: "top 85%", once: true },
-      });
+      staggerTimeline(el, { scrollTrigger: { trigger: el, start: "top 85%", once: true } });
     } else if (el.dataset.animate === "marquee") {
       return;
     } else if (el.dataset.animate === "batch") {
@@ -143,21 +143,27 @@ function floatShapes(root: ParentNode) {
 }
 
 function countUp(root: ParentNode) {
-  root.querySelectorAll<HTMLElement>("[data-count]").forEach((el) => {
-    const match = el.textContent?.trim().match(/^(\d+)(.*)$/);
+  const counters = Array.from(root.querySelectorAll<HTMLElement>("[data-count]"));
+
+  counters.forEach((el) => {
+    const final = el.dataset.count ?? "";
+    const match = final.match(/^(\d+)(.*)$/);
     if (!match) return;
     const [, digits, suffix] = match;
     const counter = { value: 0 };
-    gsap.to(counter, {
+    el.textContent = `0${suffix}`;
+    const tween = gsap.to(counter, {
       value: Number(digits),
       duration: 1.4,
       ease: "power2.out",
       scrollTrigger: { trigger: el, start: "top 90%", once: true },
       onUpdate: () => {
-        el.textContent = `${Math.round(counter.value)}${suffix}`;
+        if (tween.progress() > 0) el.textContent = `${Math.round(counter.value)}${suffix}`;
       },
     });
   });
+
+  return () => counters.forEach((el) => (el.textContent = el.dataset.count ?? el.textContent));
 }
 
 export function animatePage(root: ParentNode) {
@@ -165,6 +171,9 @@ export function animatePage(root: ParentNode) {
   revealOnScroll(root);
   const stopMarquee = marquee(root);
   floatShapes(root);
-  countUp(root);
-  return stopMarquee;
+  const resetCounters = countUp(root);
+  return () => {
+    stopMarquee();
+    resetCounters();
+  };
 }

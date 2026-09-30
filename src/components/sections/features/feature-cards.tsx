@@ -1,12 +1,15 @@
 import Image from "next/image";
-import type { ReactNode } from "react";
+import type { ComponentProps } from "react";
+
+type CardProps = ComponentProps<"article"> & { className: string };
 
 const avatars = [1, 2, 3, 4, 5, 6, 7].map((n) => `/images/hero/avatar-${n}.png`);
 
-function FloatingCard({ className, children }: { className: string; children: ReactNode }) {
+function FloatingCard({ className, children, ...props }: CardProps) {
   return (
     <article
       className={`absolute origin-top-left scale-[0.56] rounded-2xl p-4 min-[480px]:scale-75 sm:scale-100 ${className}`}
+      {...props}
     >
       {children}
     </article>
@@ -21,9 +24,9 @@ function Badge({ children }: { children: string }) {
   );
 }
 
-export function LearningProgressCard({ className }: { className: string }) {
+export function LearningProgressCard({ className, ...props }: CardProps) {
   return (
-    <FloatingCard className={`bg-white text-neutral-950 ${className}`}>
+    <FloatingCard className={`bg-white text-neutral-950 ${className}`} {...props}>
       <p className="text-[14px] leading-6 font-medium">Learning Progress</p>
       <p className="mt-2 font-heading text-[48px] leading-[1.2] font-semibold tracking-[-0.01em]">55%</p>
       <div className="mt-2 h-2 w-[200px] overflow-hidden rounded-3xl bg-[#f6f6f6]">
@@ -33,9 +36,9 @@ export function LearningProgressCard({ className }: { className: string }) {
   );
 }
 
-export function HappyStudentsCard({ className }: { className: string }) {
+export function HappyStudentsCard({ className, ...props }: CardProps) {
   return (
-    <FloatingCard className={`w-[258px] bg-white text-neutral-950 ${className}`}>
+    <FloatingCard className={`w-[258px] bg-white text-neutral-950 ${className}`} {...props}>
       <p className="text-[16px] leading-6 font-medium">Happy Students</p>
       <p className="flex h-4 items-center text-[10px] leading-[15px] text-neutral-400">
         4.5 (240)
@@ -60,9 +63,9 @@ export function HappyStudentsCard({ className }: { className: string }) {
   );
 }
 
-export function TotalRevenueCard({ className }: { className: string }) {
+export function TotalRevenueCard({ className, ...props }: CardProps) {
   return (
-    <FloatingCard className={`w-[232px] bg-primary-800 text-neutral-50 ${className}`}>
+    <FloatingCard className={`w-[232px] bg-primary-800 text-neutral-50 ${className}`} {...props}>
       <p className="text-[16px] leading-[1.2] font-medium">Total Revenue</p>
       <p className="text-[10px] leading-[1.2]">July 1-28</p>
       <div className="mt-2 flex items-center justify-between">
@@ -76,9 +79,9 @@ export function TotalRevenueCard({ className }: { className: string }) {
   );
 }
 
-export function YearToDateCard({ className }: { className: string }) {
+export function YearToDateCard({ className, ...props }: CardProps) {
   return (
-    <FloatingCard className={`w-[134px] bg-primary-800 text-neutral-50 ${className}`}>
+    <FloatingCard className={`w-[134px] bg-primary-800 text-neutral-50 ${className}`} {...props}>
       <p className="text-[16px] leading-[1.2] font-medium">Year to Date</p>
       <p className="text-[10px] leading-[1.2]">2023</p>
       <p className="mt-2 font-heading text-[24px] leading-8 font-semibold tracking-[-0.01em] whitespace-nowrap">
