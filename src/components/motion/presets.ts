@@ -22,6 +22,10 @@ function isIntro(el: HTMLElement) {
   return el.closest("[data-intro]") !== null;
 }
 
+function staggerItems(el: HTMLElement) {
+  return el.dataset.stagger ? el.querySelectorAll(el.dataset.stagger) : el.children;
+}
+
 function playIntro(root: ParentNode) {
   const tl = gsap.timeline({ defaults });
 
@@ -29,7 +33,7 @@ function playIntro(root: ParentNode) {
     const at = Number(el.dataset.at ?? 0);
     if (el.dataset.animate === "stagger") {
       gsap.set(el, { autoAlpha: 1 });
-      tl.from(el.children, { ...revealVars(el), stagger: 0.08 }, at);
+      tl.from(staggerItems(el), { ...revealVars(el), stagger: 0.08 }, at);
     } else {
       tl.from(el, revealVars(el), at);
     }
@@ -42,10 +46,10 @@ function revealOnScroll(root: ParentNode) {
 
     if (el.dataset.animate === "stagger") {
       gsap.set(el, { autoAlpha: 1 });
-      gsap.from(el.children, {
+      gsap.from(staggerItems(el), {
         ...defaults,
         ...revealVars(el),
-        stagger: 0.08,
+        stagger: Number(el.dataset.each ?? 0.08),
         scrollTrigger: { trigger: el, start: "top 85%", once: true },
       });
     } else if (el.dataset.animate === "marquee") {

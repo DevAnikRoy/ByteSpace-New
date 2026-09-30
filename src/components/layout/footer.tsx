@@ -94,7 +94,7 @@ export function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col gap-3 border-t border-neutral-200 pt-[22px] text-[12px] leading-[1.6] sm:flex-row sm:items-center sm:justify-between xl:mt-[130px]">
-          <p>@ 2023 ByteSpace. All rights reserved.</p>
+          <p>@ 2026 ByteSpace. All rights reserved.</p>
           <ul className="flex flex-wrap gap-x-6 gap-y-2">
             {legalLinks.map((label) => (
               <li key={label}>

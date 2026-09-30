@@ -6,7 +6,7 @@ export function Courses() {
   return (
     <section id="courses" className="bg-white py-14 sm:py-16 lg:py-[72px]">
       <div className="mx-auto max-w-[1440px] px-5 sm:px-10 xl:px-page">
-        <div className="text-center">
+        <div data-animate="stagger" data-each="0.12" className="text-center">
           <h2 className="mx-auto max-w-[588px] font-heading text-[30px] leading-[1.2] font-semibold tracking-[-0.01em] text-ink sm:text-[36px] lg:text-[44px]">
             Discover Your Passion, <br className="hidden sm:inline" />
             Build Your Skills
@@ -17,11 +17,17 @@ export function Courses() {
           </p>
         </div>
 
-        <div className="mt-8 lg:mt-[44px]">
+        <div
+          data-animate="stagger"
+          data-stagger="button"
+          data-preset="pop"
+          data-each="0.04"
+          className="mt-8 lg:mt-[44px]"
+        >
           <CategoryTabs rows={categoryRows} />
         </div>
 
-        <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:mt-[76px] lg:gap-10 xl:grid-cols-3">
+        <ul data-animate="batch" className="mt-10 grid gap-6 sm:grid-cols-2 lg:mt-[76px] lg:gap-10 xl:grid-cols-3">
           {courses.map((course) => (
             <li key={course.title}>
               <CourseCard course={course} />
