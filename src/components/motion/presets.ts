@@ -18,6 +18,15 @@ function revealVars(el: HTMLElement, group?: HTMLElement): gsap.TweenVars {
   return { autoAlpha: 0, ...(offsets[preset] ?? offsets["fade-up"]), clearProps: "transform" };
 }
 
+// capped at the end of the page so triggers near the bottom still fire
+function revealStart(ratio: number) {
+  return (self: ScrollTrigger) => {
+    const trigger = self.trigger as HTMLElement;
+    const start = trigger.getBoundingClientRect().top + window.scrollY - window.innerHeight * ratio;
+    return Math.min(start, ScrollTrigger.maxScroll(window) - 1);
+  };
+}
+
 function isIntro(el: HTMLElement) {
   return el.closest("[data-intro]") !== null;
 }
@@ -51,7 +60,7 @@ function revealOnScroll(root: ParentNode) {
     if (isIntro(el)) return;
 
     if (el.dataset.animate === "stagger") {
-      staggerTimeline(el, { scrollTrigger: { trigger: el, start: "top 85%", once: true } });
+      staggerTimeline(el, { scrollTrigger: { trigger: el, start: revealStart(0.85), once: true } });
     } else if (el.dataset.animate === "marquee") {
       return;
     } else if (el.dataset.animate === "batch") {
@@ -59,7 +68,7 @@ function revealOnScroll(root: ParentNode) {
       const items = Array.from(el.children);
       gsap.set(items, { autoAlpha: 0, ...offsets[el.dataset.preset ?? "fade-up"] });
       ScrollTrigger.batch(items, {
-        start: "top 88%",
+        start: revealStart(0.88),
         once: true,
         onEnter: (batch) =>
           gsap.to(batch, { ...defaults, autoAlpha: 1, x: 0, y: 0, scale: 1, stagger: 0.1, clearProps: "transform" }),
@@ -68,7 +77,7 @@ function revealOnScroll(root: ParentNode) {
       gsap.from(el, {
         ...defaults,
         ...revealVars(el),
-        scrollTrigger: { trigger: el, start: "top 85%", once: true },
+        scrollTrigger: { trigger: el, start: revealStart(0.85), once: true },
       });
     }
   });
@@ -110,7 +119,7 @@ function marquee(root: ParentNode) {
       autoAlpha: 0,
       y: 16,
       stagger: (index) => (index % perSet) * 0.08,
-      scrollTrigger: { trigger: track, start: "top 85%", once: true },
+      scrollTrigger: { trigger: track, start: revealStart(0.85), once: true },
     });
 
     const slow = () => gsap.to(loop, { timeScale: 0, duration: 0.4, overwrite: true });
@@ -156,7 +165,7 @@ function countUp(root: ParentNode) {
       value: Number(digits),
       duration: 1.4,
       ease: "power2.out",
-      scrollTrigger: { trigger: el, start: "top 90%", once: true },
+      scrollTrigger: { trigger: el, start: revealStart(0.9), once: true },
       onUpdate: () => {
         if (tween.progress() > 0) el.textContent = `${Math.round(counter.value)}${suffix}`;
       },
