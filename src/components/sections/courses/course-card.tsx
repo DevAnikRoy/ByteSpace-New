@@ -15,10 +15,12 @@ function CourseCardBase({
   course,
   ratingIcon,
   learnersClassName,
+  imageLoading,
 }: {
   course: Course;
   ratingIcon: string;
   learnersClassName: string;
+  imageLoading?: "eager" | "lazy";
 }) {
   return (
     <article className="rounded-3xl border border-neutral-200 bg-white p-[15px] pb-5">
@@ -28,6 +30,7 @@ function CourseCardBase({
           alt=""
           fill
           sizes="(min-width: 1280px) 341px, (min-width: 640px) 50vw, 100vw"
+          loading={imageLoading}
           className="object-cover"
         />
         <ul className="absolute bottom-[18px] left-[13px] flex gap-1.5 @min-[341px]:gap-3">
@@ -99,6 +102,11 @@ export function CourseCard({ course }: { course: Course }) {
 
 export function ShowcaseCourseCard({ course }: { course: Course }) {
   return (
-    <CourseCardBase course={course} ratingIcon="/icons/rating-star-lime.png" learnersClassName="bg-black text-white" />
+    <CourseCardBase
+      course={course}
+      ratingIcon="/icons/rating-star-lime.png"
+      learnersClassName="bg-black text-white"
+      imageLoading="eager"
+    />
   );
 }

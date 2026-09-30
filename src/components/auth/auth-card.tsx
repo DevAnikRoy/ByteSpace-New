@@ -27,14 +27,25 @@ export function AuthCard({
   );
 }
 
-export function AuthSubmit({ children }: { children: ReactNode }) {
+export function AuthSubmit({ pending = false, children }: { pending?: boolean; children: ReactNode }) {
   return (
     <button
       type="submit"
-      className="mt-6 h-[46px] self-end rounded-3xl bg-secondary-400 px-6 text-[18px] leading-[1.2] font-medium transition-colors hover:bg-secondary-300"
+      disabled={pending}
+      aria-busy={pending}
+      className="mt-6 h-[46px] self-end rounded-3xl bg-secondary-400 px-6 text-[18px] leading-[1.2] font-medium transition-colors hover:bg-secondary-300 disabled:cursor-not-allowed disabled:opacity-60"
     >
       {children}
     </button>
+  );
+}
+
+export function AuthError({ message }: { message: string | null }) {
+  if (!message) return null;
+  return (
+    <p role="alert" className="mt-4 text-[14px] leading-[1.6] text-red-600">
+      {message}
+    </p>
   );
 }
 

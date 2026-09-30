@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
+import { AccountNav } from "@/components/layout/account-nav";
 import { MobileMenu } from "@/components/layout/mobile-menu";
-import { authLinks, mainLinks } from "@/components/layout/nav-links";
+import { mainLinks } from "@/components/layout/nav-links";
 
 const activeHref = "/";
 
@@ -47,17 +48,13 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-6 lg:mt-[13px] lg:flex">
-          {authLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="text-[16px] leading-6 text-neutral-50 hover:opacity-80">
-              {link.label}
-            </Link>
-          ))}
+          <AccountNav itemClassName="text-[16px] leading-6 text-neutral-50 hover:opacity-80" />
           <button type="button" aria-label="Cart" className="h-6 w-6">
             <Image src="/icons/bag.png" alt="" width={24} height={24} />
           </button>
         </div>
 
-        <MobileMenu links={[...mainLinks, ...authLinks]} />
+        <MobileMenu links={mainLinks} />
       </div>
     </header>
   );
