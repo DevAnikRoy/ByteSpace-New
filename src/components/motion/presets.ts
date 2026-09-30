@@ -48,6 +48,8 @@ function revealOnScroll(root: ParentNode) {
         stagger: 0.08,
         scrollTrigger: { trigger: el, start: "top 85%", once: true },
       });
+    } else if (el.dataset.animate === "marquee") {
+      return;
     } else if (el.dataset.animate === "batch") {
       gsap.set(el, { autoAlpha: 1 });
       const items = Array.from(el.children);
@@ -66,6 +68,58 @@ function revealOnScroll(root: ParentNode) {
       });
     }
   });
+}
+
+function marquee(root: ParentNode) {
+  const cleanups: Array<() => void> = [];
+
+  root.querySelectorAll<HTMLElement>('[data-animate="marquee"]').forEach((track) => {
+    const sets = Array.from(track.children) as HTMLElement[];
+    const first = sets[0];
+    if (!first) return;
+
+    const setWidth = first.offsetWidth;
+    const gap = parseFloat(getComputedStyle(first).paddingRight) || 0;
+    const viewport = track.parentElement?.clientWidth ?? setWidth;
+    const start = (viewport - (setWidth - gap)) / 2;
+
+    const loop = gsap.to(track, {
+      xPercent: -100 / sets.length,
+      duration: setWidth / 60,
+      ease: "none",
+      repeat: -1,
+      paused: true,
+    });
+    loop.progress((((setWidth - start) % setWidth) + setWidth) % setWidth / setWidth);
+
+    ScrollTrigger.create({
+      trigger: track,
+      start: "top bottom",
+      end: "bottom top",
+      onToggle: (self) => (self.isActive ? loop.play() : loop.pause()),
+    });
+
+    const perSet = first.children.length;
+    gsap.set(track, { autoAlpha: 1 });
+    gsap.from(track.querySelectorAll("li"), {
+      ...defaults,
+      autoAlpha: 0,
+      y: 16,
+      stagger: (index) => (index % perSet) * 0.08,
+      scrollTrigger: { trigger: track, start: "top 85%", once: true },
+    });
+
+    const slow = () => gsap.to(loop, { timeScale: 0, duration: 0.4, overwrite: true });
+    const resume = () => gsap.to(loop, { timeScale: 1, duration: 0.4, overwrite: true });
+    track.addEventListener("mouseenter", slow);
+    track.addEventListener("mouseleave", resume);
+    cleanups.push(() => {
+      track.removeEventListener("mouseenter", slow);
+      track.removeEventListener("mouseleave", resume);
+    });
+  });
+
+  return () => cleanups.forEach((cleanup) => cleanup());
 }
 
 function floatShapes(root: ParentNode) {
@@ -105,6 +159,8 @@ function countUp(root: ParentNode) {
 export function animatePage(root: ParentNode) {
   playIntro(root);
   revealOnScroll(root);
+  const stopMarquee = marquee(root);
   floatShapes(root);
   countUp(root);
+  return stopMarquee;
 }

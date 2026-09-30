@@ -34,7 +34,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full bg-background font-sans text-foreground">
         <noscript>
-          <style>{"[data-animate]{visibility:visible!important}"}</style>
+          <style>{"[data-animate]{visibility:visible!important}[data-marquee-copy]{display:none!important}"}</style>
         </noscript>
         {children}
         <PageAnimations />
